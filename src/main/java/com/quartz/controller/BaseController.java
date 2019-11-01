@@ -3,7 +3,7 @@ package com.quartz.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.quartz.annotation.Excel.*;
+import com.quartz.annotation.Excel;
 import com.quartz.common.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +22,7 @@ import java.util.List;
  * 
  * @author ruoyi
  */
-public class BaseController
-{
+public class BaseController {
     protected final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     /**
@@ -51,7 +50,7 @@ public class BaseController
         PageDomain pageDomain = TableSupport.buildPageRequest();
         Integer pageNum = pageDomain.getPageNum();
         Integer pageSize = pageDomain.getPageSize();
-        if (StringUtils.isNotNull(pageNum) && StringUtils.isNotNull(pageSize))
+        if (null != pageNum && null != pageSize)
         {
             String orderBy = SqlUtil.escapeOrderBySql(pageDomain.getOrderBy());
             PageHelper.startPage(pageNum, pageSize, orderBy);
@@ -95,9 +94,10 @@ public class BaseController
         return rspData;
     }
 
+
     /**
      * 响应返回结果
-     * 
+     *
      * @param rows 影响行数
      * @return 操作结果
      */
@@ -108,7 +108,7 @@ public class BaseController
 
     /**
      * 响应返回结果
-     * 
+     *
      * @param result 结果
      * @return 操作结果
      */
@@ -152,7 +152,7 @@ public class BaseController
     /**
      * 返回错误码消息
      */
-    public AjaxResult error(Type type, String message)
+    public AjaxResult error(Excel.Type type, String message)
     {
         return new AjaxResult(type, message);
     }
@@ -164,4 +164,5 @@ public class BaseController
 //    {
 //        return StringUtils.format("redirect:{}", url);
 //    }
+
 }

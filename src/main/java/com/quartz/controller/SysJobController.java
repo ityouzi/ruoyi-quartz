@@ -9,34 +9,29 @@ import com.quartz.domain.SysJob;
 import com.quartz.service.ISysJobService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/monitor/job")
+import static org.apache.naming.SelectorContext.prefix;
+
+@Controller
+@RequestMapping("job")
 public class SysJobController extends BaseController{
 
-    private String prefix = "monitor/job";
 
     @Autowired
     private ISysJobService jobService;
-
-//    @RequiresPermissions("monitor:job:view")
-    @GetMapping()
-    public String job()
-    {
-        return prefix + "/job";
-    }
 
 
     /**
      * 查询任务列表
      */
 //    @RequiresPermissions("monitor:job:list")
-    @PostMapping("/list")
+    @PostMapping("list")
     @ResponseBody
     public TableDataInfo list(SysJob job)
     {
@@ -83,11 +78,12 @@ public class SysJobController extends BaseController{
 //    @RequiresPermissions("monitor:job:changeStatus")
     @PostMapping("/changeStatus")
     @ResponseBody
-    public AjaxResult changeStatus(SysJob job) throws SchedulerException
-    {
-        SysJob newJob = jobService.selectJobById(job.getJobId());
+    public AjaxResult changeStatus(SysJob job) throws SchedulerException {
+        SysJob newJob = jobService.selectJobById(job.getJobId());       // 查询任务
         newJob.setStatus(job.getStatus());
-        return toAjax(jobService.changeStatus(newJob));
+        int i = jobService.changeStatus(newJob);
+        System.err.println(i);
+        return toAjax(i);
     }
 
     /**
@@ -119,8 +115,7 @@ public class SysJobController extends BaseController{
 //    @RequiresPermissions("monitor:job:add")
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(@Validated SysJob job) throws SchedulerException, TaskException
-    {
+    public AjaxResult addSave(@Validated SysJob job) throws SchedulerException, TaskException {
         return toAjax(jobService.insertJob(job));
     }
 
@@ -151,8 +146,7 @@ public class SysJobController extends BaseController{
      */
     @PostMapping("/checkCronExpressionIsValid")
     @ResponseBody
-    public boolean checkCronExpressionIsValid(SysJob job)
-    {
+    public boolean checkCronExpressionIsValid(SysJob job) {
         return jobService.checkCronExpressionIsValid(job.getCronExpression());
     }
 

@@ -1,10 +1,10 @@
 server:
-  port: 8088
+  port: 8082
 # 日志配置
 logging:
   level:
     com.quartz: debug
-    org.springframework: warn
+#    org.springframework: warn
 
 
 
@@ -36,26 +36,27 @@ spring:
       testWhileIdle: true
       testOnBorrow: false
       testOnReturn: false
-#      webStatFilter:
-#        enabled: true
-#      statViewServlet:
-#        enabled: true
-#        # 设置白名单，不填则允许所有访问
-##        allow:
-##        url-pattern: /druid/*
-#        # 控制台管理用户名和密码
-#        login-username:
-#        login-password:
-#      filter:
-#        stat:
-#          enabled: true
-#          # 慢SQL记录
-#          log-slow-sql: true
-#          slow-sql-millis: 1000
-#          merge-sql: true
-#        wall:
-#          config:
-#            multi-statement-allow: true
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        # 设置白名单，不填则允许所有访问
+        allow:
+        url-pattern: /druid/*
+        # 控制台管理用户名和密码
+        login-username:
+        login-password:
+      filter:
+        stat:
+          enabled: true
+          # 慢SQL记录
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+
 
 
 mybatis:

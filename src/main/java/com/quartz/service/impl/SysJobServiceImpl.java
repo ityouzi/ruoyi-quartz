@@ -158,15 +158,14 @@ public class SysJobServiceImpl implements ISysJobService
     public int changeStatus(SysJob job) throws SchedulerException
     {
         int rows = 0;
-        String status = job.getStatus();
-        if (ScheduleConstants.Status.NORMAL.getValue().equals(status))
-        {
-            rows = resumeJob(job);
+        String status = job.getStatus();        // 获取任务状态 0正常
+        if (ScheduleConstants.Status.NORMAL.getValue().equals(status)) {
+            rows = resumeJob(job);              // 恢复任务
         }
-        else if (ScheduleConstants.Status.PAUSE.getValue().equals(status))
-        {
-            rows = pauseJob(job);
+        else if (ScheduleConstants.Status.PAUSE.getValue().equals(status)) {
+            rows = pauseJob(job);               // 暂停任务 1暂停
         }
+        System.out.println(rows);
         return rows;
     }
 

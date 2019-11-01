@@ -23,7 +23,7 @@ public class ScheduleConfig {
 
         // quartz参数
         Properties prop = new Properties();
-        prop.put("org.quartz.scheduler.instanceName", "BtcShcheduler");     // 实例名
+        prop.put("org.quartz.scheduler.instanceName", "BtcShcheduler");         // 实例名
         prop.put("org.quartz.scheduler.instanceId", "AUTO");
 
         // 线程池配置
@@ -35,8 +35,8 @@ public class ScheduleConfig {
         prop.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
 
         // 集群配置
-        prop.put("org.quartz.jobStore.isClustered", "true");
-        prop.put("org.quartz.jobStore.clusterCheckinInterval", "15000");
+        prop.put("org.quartz.jobStore.isClustered", "true");                    // 打开集群
+        prop.put("org.quartz.jobStore.clusterCheckinInterval", "15000");        // 设置集群检查间隔150s
         prop.put("org.quartz.jobStore.maxMisfiresToHandleAtATime", "1");
         prop.put("org.quartz.jobStore.txIsolationLevelSerializable", "true");
 
